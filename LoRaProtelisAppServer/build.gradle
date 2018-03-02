@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = jdkVersion
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile "org.protelis:protelis-interpreter:$protelisVersion"
+	compile "org.thethingsnetwork:data-common:$datacommonVersion"
+	compile "org.thethingsnetwork:data-mqtt:$datamqttVersion"
+	compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonannotationsVersion"
+	compile "com.fasterxml.jackson.core:jackson-core:$jacksoncoreVersion"
+	compile "com.fasterxml.jackson.core:jackson-databind:$jacksondatabindVersion"
+    compile "org.eclipse.paho:org.eclipse.paho.client.mqttv3:$pahoclientmqttv3Version"
+	
+	testRuntime "org.protelis:protelis:$protelisVersion"
+	testRuntime "org.thethingsnetwork:data-common:$datacommonVersion"
+    testRuntime "org.thethingsnetwork:data-mqtt:$datamqttVersion"
+    testRuntime "com.fasterxml.jackson.core:jackson-annotation:$jacksonannotationsVersion"
+    testRuntime "com.fasterxml.jackson.core:jackson-core:$jacksoncoreVersion"
+    testRuntime "com.fasterxml.jackson.core:jackson-databind:$jacksondatabindVersion"
+    testRuntime "org.eclipse.paho:org.eclipse.paho.client.mqttv3:$pahoclientmqttv3Version"
+}
