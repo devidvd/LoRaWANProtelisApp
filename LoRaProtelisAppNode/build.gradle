@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = jdkVersion
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile "org.protelis:protelis-interpreter:$protelisVersion"
+	compile "org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:$rxtxVersion"
+	
+	testRuntime "org.protelis:protelis:$protelisVersion"
+	testRuntime "org.bidib.jbidib.org.qbang.rxtx:rxtxcomm:$rxtxVersion"
+}
