@@ -25,15 +25,15 @@ public class SerialCommChannel implements CommChannel, SerialPortEventListener {
                 final CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(port);
                 //open serial port
                 serialPort = (SerialPort) portId.open(this.getClass().getName(), 2000);
-                // set port parameters
+                //set port parameters
                 serialPort.setSerialPortParams(rate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, 
                         SerialPort.PARITY_NONE);
-                // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
-                // open the streams
+                //serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN);
+                //open the streams
                 input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
                 output = serialPort.getOutputStream();
 
-                // add event listeners
+                //add event listeners
                 serialPort.addEventListener(this);
                 serialPort.notifyOnDataAvailable(true);
         }
@@ -81,7 +81,7 @@ public class SerialCommChannel implements CommChannel, SerialPortEventListener {
         }
 
         /**
-         * Handle an event on the serial port. Read the data and print it.
+         * Handle an event on the serial port. Read the data and print it in case of exception.
          */
         //@Override
         public synchronized void serialEvent(SerialPortEvent oEvent) {
@@ -95,7 +95,7 @@ public class SerialCommChannel implements CommChannel, SerialPortEventListener {
                                 System.err.println(e.toString());
                         }
                 }
-                // Ignore all the other events
+                //Ignore all the other events
         }
 
 }

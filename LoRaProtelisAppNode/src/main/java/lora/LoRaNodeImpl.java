@@ -25,7 +25,7 @@ public class LoRaNodeImpl implements LoRaNode {
     private boolean joinWithOTAA;
     private Integer loraDataRate;
     private Integer powerIndex;
-    private long wait_time_after_transmit;
+    private long timeToWaitAfterTransmission;
     private String codingRate;
     private List<Integer> uplinkTargetServerPorts;
     private int portListsPosition;
@@ -63,19 +63,19 @@ public class LoRaNodeImpl implements LoRaNode {
         
         this.loraDataRate = loraDataRate;
         this.powerIndex = powerIndex;
-        this.wait_time_after_transmit = transmission_freq;
+        this.timeToWaitAfterTransmission = transmission_freq;
         this.uplinkTargetServerPorts = uplinkTargetServerPorts;
         switch(cr) {
-            case 0:
+            case 1:
                 this.codingRate = "4/5";
                 break;
-            case 1:
+            case 2:
                 this.codingRate = "4/6";
                 break;
-            case 2:
+            case 3:
                 this.codingRate = "4/7";
                 break;
-            case 3:
+            case 4:
                 this.codingRate = "4/8";
                 break;
         }
@@ -323,14 +323,11 @@ public class LoRaNodeImpl implements LoRaNode {
                         }//end wait loop of the 2° response
                     }
                 }
-            }//end wait loop of the 1° respose*/
+            }//end wait loop of the 1° respose
             Thread.sleep(5000);
             this.channel.receiveMsg();
             keep_join = false;
         }//end of keep join loop
-        //wait the transmission time amount, before start transmit
-        System.out.println("Wait " + this.wait_time_after_transmit + " milliseconds, before begin to transmit.");
-        Thread.sleep(this.wait_time_after_transmit);
     }
     
     @Override
@@ -477,6 +474,16 @@ public class LoRaNodeImpl implements LoRaNode {
     @Override
     public String getDevEUI() {
         return this.devEui;
+    }
+    
+    @Override
+    public int getLoraDataRate() {
+        return this.loraDataRate;
+    }
+
+    @Override
+    public long getTimeToWaitAfterTransmission() {
+        return this.timeToWaitAfterTransmission;
     }
     
 }

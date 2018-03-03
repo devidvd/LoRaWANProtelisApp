@@ -80,4 +80,8 @@ public interface LoRaNode {
     
     public String getDevEUI();
     
+    public int getLoraDataRate();
+    
+    public long getTimeToWaitAfterTransmission();
+    
 }
