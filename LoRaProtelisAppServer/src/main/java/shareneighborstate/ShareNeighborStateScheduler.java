@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.protelis.vm.util.CodePath;
 
-import util.DevEUI;
-import util.Pair;
+import protelis.util.DevEUI;
+import protelis.util.Pair;
 
 /**
  * This class store the nodes manage the priority of the nodes currently joined.

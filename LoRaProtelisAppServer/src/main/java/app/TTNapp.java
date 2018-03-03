@@ -1,10 +1,17 @@
 package app;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.protelis.vm.util.CodePath;
 import org.thethingsnetwork.data.common.Connection;
 import org.thethingsnetwork.data.mqtt.Client;
 
@@ -12,8 +19,9 @@ import app.handlers.ABPDeviceUplinkMsgJoinHandler;
 import app.handlers.ConnectionErrorHandler;
 import app.handlers.OTAADeviceJoinMsgHandler;
 import app.handlers.UplinkMsgHandler;
+import protelis.util.DevEUI;
+import protelis.util.Pair;
 import shareneighborstate.ShareNeighborStateScheduler;
-import util.Pair;
 
 /**
  * Application.
@@ -76,6 +84,19 @@ public class TTNapp {
             TimeUnit.MINUTES.sleep(3);
             this.shareNeighborStateScheduler.schedule();
         }
+    }
+    
+    /** 
+     * Convert a neighbor state to a Base64 string. 
+     * This method will be called by the server application
+     * before send data.
+     * */
+    public String serializeNeighborState(Map<DevEUI, Map<CodePath, Serializable>> instance) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(instance);
+        objectOutputStream.close();
+        return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray()); 
     }
     
 }

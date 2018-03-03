@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.protelis.vm.util.CodePath;
 
-import util.Pair;
+import protelis.util.Pair;
 
 
 public final class Main {
